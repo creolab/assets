@@ -1,0 +1,37 @@
+{
+    "name": "creolab/assets",
+    "description": "",
+    "authors": [
+        {
+            "name": "Boris Strahija",
+            "email": "boris@creolab.hr"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x",
+        "illuminate/config": "4.0.*",
+        "illuminate/console": "4.0.*",
+        "illuminate/filesystem": "4.0.*",
+        "natxet/CssMin": "dev-master",
+        "linkorb/jsmin-php": "dev-master",
+        "leafo/lessphp": "dev-master",
+        "leafo/scssphp": "dev-master",
+        "ptachoire/cssembed": "dev-master",
+        "symfony/process": "2.3.*",
+        "kriswallsmith/assetic": "1.1.*",
+        "jasonlewis/basset": "dev-master"
+    },
+    "require-dev": {
+        "mockery/mockery": ">=0.7.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "Creolab\\Assets": "src/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "dev"
+}
