@@ -20,7 +20,7 @@
         "leafo/scssphp": "dev-master",
         "ptachoire/cssembed": "dev-master",
         "symfony/process": "2.3.*",
-        "kriswallsmith/assetic": "1.1.*",
+        "kriswallsmith/assetic": "1.1.*"
     },
     "require-dev": {
         "mockery/mockery": ">=0.7.2"
