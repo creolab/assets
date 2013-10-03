@@ -151,7 +151,10 @@ class AssetItem {
 	{
 		if ($this->path and ! $this->contents)
 		{
-			$this->contents = app('files')->getRemote($this->path);
+			if (app('files')->exists($this->path))
+			{
+				$this->contents = app('files')->getRemote($this->path);
+			}
 		}
 
 		return $this->contents;

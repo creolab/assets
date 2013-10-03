@@ -1,6 +1,7 @@
 {
     "name": "creolab/assets",
-    "description": "",
+    "description": "Assets manager. Supports Less, Sass, CoffeeScript...",
+    "keywords": ["assets", "css", "javascript", "less", "sass", "coffescript", "laravel"],
     "authors": [
         {
             "name": "Boris Strahija",
@@ -20,7 +21,6 @@
         "ptachoire/cssembed": "dev-master",
         "symfony/process": "2.3.*",
         "kriswallsmith/assetic": "1.1.*",
-        "jasonlewis/basset": "dev-master"
     },
     "require-dev": {
         "mockery/mockery": ">=0.7.2"
