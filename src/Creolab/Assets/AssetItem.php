@@ -85,7 +85,7 @@ class AssetItem {
 	public function fileInfo()
 	{
 		// URL to asset file
-		$this->url = app('config')->get('assets::base_url') . app('config')->get('assets::public_path') . '/' . $this->name;
+		$this->url = app('config')->get('assets::base_url') . app('config')->get('assets::public_dir') . '/' . $this->name;
 
 		// Get advanced info for compiling
 		if ($this->collection->shouldCompile())

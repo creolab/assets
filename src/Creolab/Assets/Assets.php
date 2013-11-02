@@ -248,4 +248,23 @@ class Assets {
 		}
 	}
 
+	/**
+	 * Returns a public path to the application
+	 * @param  string $path
+	 * @return string
+	 */
+	public function publicPath($path = null)
+	{
+		return app('config')->get('assets::base_url');
+	}
+
+	/**
+	 * Path to assets directory
+	 * @return string
+	 */
+	public function assetsPath()
+	{
+		return $this->publicPath() . app('config')->get('assets::public_dir');
+	}
+
 }
