@@ -19,7 +19,7 @@
         "leafo/lessphp": "dev-master",
         "leafo/scssphp": "dev-master",
         "ptachoire/cssembed": "dev-master",
-        "kriswallsmith/assetic": "1.*"
+        "kriswallsmith/assetic": "~1"
     },
     "require-dev": {
         "mockery/mockery": ">=0.7.2"
