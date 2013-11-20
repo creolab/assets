@@ -38,7 +38,7 @@ return array(
 	 * Available filters for your assets
 	 */
 	'filters' => array(
-		'cssmin'    => '\\Assets\\Filters\\CSSFilter',
+		'cssmin'    => '\\Creolab\\Assets\\Filters\\CSSFilter',
 		'jsmin'     => '\\Assetic\\Filter\\JSMinFilter',
 		'less'      => '\\Assetic\\Filter\\LessphpFilter',
 		'scss'      => '\\Assetic\\Filter\\ScssphpFilter',

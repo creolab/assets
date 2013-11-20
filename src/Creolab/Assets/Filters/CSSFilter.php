@@ -2,7 +2,7 @@
 
 use Assetic\Asset\AssetInterface;
 use Assetic\Filter\FilterInterface;
-use Assets\Minifiers\CSSMin;
+use Creolab\Assets\Minifiers\CSSMin;
 
 class CSSFilter implements FilterInterface {
 
