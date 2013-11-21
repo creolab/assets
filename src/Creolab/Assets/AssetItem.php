@@ -121,14 +121,23 @@ class AssetItem {
 			{
 				if (isset($matches[2]) and $import = $matches[2])
 				{
-					$importPath     = public_path() . '/' . app('config')->get('assets::public_path') . '/' . $assetDir . '/' . str_replace("\"", "", $import);
-					$importModified = (int) @filemtime($importPath);
+					$isRemote = (strpos($import, 'http://') === 0 or strpos($import, 'https://') === 0 or strpos($import, '//') === 0);
 
-					// Check modified time
-					if ($importModified > $this->modified) $this->modified = $importModified;
+					if ( ! $isRemote)
+					{
+						$importPath     = public_path() . '/' . app('config')->get('assets::public_path') . '/' . $assetDir . '/' . str_replace("\"", "", $import);
+						$importModified = (int) @filemtime($importPath);
 
-					// Get imported contents
-					return app('files')->getRemote($importPath);
+						// Check modified time
+						if ($importModified > $this->modified) $this->modified = $importModified;
+
+						// Get imported contents
+						return app('files')->getRemote($importPath);
+					}
+					elseif (isset($matches[0]))
+					{
+						return $matches[0];
+					}
 				}
 			};
 
