@@ -27,7 +27,7 @@ class AssetsServiceProvider extends ServiceProvider {
 		$this->registerBindings();
 
 		// Add some Artisan commands
-		// $this->bootCommands();
+		$this->bootCommands();
 
 		// Shortcut so developers don't need to add an Alias in app/config/app.php
 		if ($alias = $this->app['config']->get('assets::alias'))
@@ -61,13 +61,18 @@ class AssetsServiceProvider extends ServiceProvider {
 	 */
 	public function bootCommands()
 	{
-		// Add compile command to IoC
-		$this->app['assets.compile'] = $this->app->share(function($app) {
-			return '...';
+		// Add list command to IoC
+		$this->app['assets.commands.assets'] = $this->app->share(function($app) {
+			return new Commands\AssetsCommand($app);
+		});
+
+		// Add build command to IoC
+		$this->app['assets.commands.build'] = $this->app->share(function($app) {
+			return new Commands\BuildCommand($app);
 		});
 
 		// Now register all the commands
-		$this->commands('assets.compile');
+		$this->commands('assets.commands.assets', 'assets.commands.build');
 	}
 
 	/**

@@ -158,7 +158,14 @@ class AssetCollection extends \Illuminate\Support\Collection {
 		// Generate the name
 		$time      = $this->modified;
 		$extension = $this->type;
-		$fileName  = pathinfo($this->id, PATHINFO_FILENAME) . "." . md5($this->id . '::' . $time . '::' . implode("|", $this->files) . '::' . implode("|", $this->filters));
+
+		// Build the name
+		$baseName = str_replace(
+			"_" . $this->type . '.' . $this->type,
+			'',
+			$this->id
+		);
+		$fileName  = $baseName . "." . md5($this->id . '::' . $time . '::' . implode("|", $this->files) . '::' . implode("|", $this->filters));
 		$name      = $fileName . "." . $extension;
 
 		// Generate the cache file path

@@ -60,7 +60,8 @@ if ( ! function_exists('assets'))
 	{
 		if ( ! $assets)
 		{
-			$config = app('config')->get('krustr::assets.'.$collection);
+			$configCollection = str_replace(".", "_", $collection);
+			$config           = app('config')->get('assets.'.$configCollection, 'krustr::assets.'.$configCollection);
 
 			if ($config and is_array($config))
 			{

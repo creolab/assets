@@ -10,8 +10,6 @@ use Assetic\Filter\ScssphpFilter;
 use Assetic\Filter\CssMinFilter;
 use Assetic\Filter\JSMinFilter;
 
-class CompileFailedException extends \Exception {}
-
 class Compiler {
 
 	/**
@@ -96,19 +94,18 @@ class Compiler {
 		// Create the collection in Assetic
 		try
 		{
-			// Create string asset
-			$asset                      = new StringAsset($this->collection->contents, $filters);
-			$this->collection->contents = $asset->dump();
-
 			// Clear the cache
 			app('assets')->clearCache($this->collection->id);
+
+			// Create string asset
+			$asset = new StringAsset($this->collection->contents, $filters);
 
 			// Directory
 			$cachePath = public_path() . '/' . app('config')->get('assets::cache_path');
 			if ( ! app('files')->exists($cachePath)) app('files')->makeDirectory($cachePath, 0777, true);
 
 			// And write contents
-			if ($this->collection->cacheFilePath) app('files')->put($this->collection->cacheFilePath, $this->collection->contents);
+			if ($this->collection->cacheFilePath) app('files')->put($this->collection->cacheFilePath, $asset->dump());
 
 			$this->collection->contents = null;
 		}
