@@ -9,6 +9,12 @@ class AssetCollection extends \Illuminate\Support\Collection {
 	public $id;
 
 	/**
+	 * File name for collection
+	 * @var array
+	 */
+	public $name;
+
+	/**
 	 * Type of collection
 	 * @var array
 	 */
@@ -85,9 +91,13 @@ class AssetCollection extends \Illuminate\Support\Collection {
 		// Assign parameters
 		$this->id      = $id;
 		$this->type    = $type;
-		$this->filters = (array) array_get($options, 'filters');
 		$this->compile = (bool)  array_get($options, 'compile', true);
 		$this->combine = (bool)  array_get($options, 'combine', true);
+
+		// Get filter by ENV
+		$env = (app()->environment()) ?: 'development';
+		if ($env) $this->filters = (array) array_get($options, 'filters.' . $env);
+		else      $this->filters = (array) array_get($options, 'filters');
 
 		// Add asets to collection
 		if ($assets) $this->add($type, $assets);
@@ -160,12 +170,12 @@ class AssetCollection extends \Illuminate\Support\Collection {
 		$extension = $this->type;
 
 		// Build the name
-		$baseName = str_replace(
+		$baseName = str_replace('.' . $this->type, '', str_replace(
 			"_" . $this->type . '.' . $this->type,
 			'',
 			$this->id
-		);
-		$fileName  = $baseName . "." . md5($this->id . '::' . $time . '::' . implode("|", $this->files) . '::' . implode("|", $this->filters));
+		));
+		$fileName  = $baseName . "." . md5($this->id . '::' . $time . '::' . implode("|", $this->files) . '::' . implode("|", array_flatten($this->filters)));
 		$name      = $fileName . "." . $extension;
 
 		// Generate the cache file path

@@ -53,7 +53,7 @@ class Assets {
 	public function addCollection($type = 'css', $id, $assets = array(), $options = array())
 	{
 		// Create name
-		$name = $id . '.' . $type;
+		$name = array_get($options, 'name') ?: $id . '.' . $type;
 
 		// Add new assets collection if it doesn't exist or just add additional assets
 		if ( ! $this->collectionExists($name))
@@ -197,11 +197,20 @@ class Assets {
 	 */
 	public function assets($collection = 'default', $assets = array(), $options = array())
 	{
+		$start = microtime();
 		$type = pathinfo($collection, PATHINFO_EXTENSION);
 		$name = pathinfo($collection, PATHINFO_FILENAME);
 
-		if ($type == 'js') return app('assets')->showJSCollection($name,  $assets, $options);
-		else               return app('assets')->showCSSCollection($name, $assets, $options);
+		if ($type == 'js') $assets = app('assets')->showJSCollection($name,  $assets, $options);
+		else               $assets = app('assets')->showCSSCollection($name, $assets, $options);
+
+		// Calculate duration
+		list($sm, $ss) = explode(' ', $start);
+		list($em, $es) = explode(' ', microtime());
+		$duration = number_format(($em + $es) - ($sm + $ss), 4);
+		app('log')->debug("[ASSETS] Collection '$collection' displayed in $duration ms.");
+
+		return $assets;
 	}
 
 	/**

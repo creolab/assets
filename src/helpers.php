@@ -67,12 +67,15 @@ if ( ! function_exists('assets'))
 			{
 				$assets  = array_get($config, 'assets');
 				$options = array_except($config, 'assets');
+
+				if ( ! $name = array_get($options, 'name')) $options['name'] = $collection;
 			}
 		}
 		elseif (array_get($assets, 'assets'))
 		{
-			$options = array_except($assets, 'assets');
-			$assets  = array_get($assets, 'assets');
+			$assets          = array_get($assets, 'assets');
+			$options         = array_except($assets, 'assets');
+			$options['name'] = $collection;
 		}
 
 		return app('assets')->assets($collection, $assets, $options);

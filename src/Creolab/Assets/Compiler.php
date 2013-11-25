@@ -50,6 +50,8 @@ class Compiler {
 	 */
 	public function run()
 	{
+		app('log')->debug("[ASSETS] Compiling collection '".$this->collection->id."'");
+
 		// Collection contents
 		$this->collection->contents = '';
 
@@ -117,6 +119,7 @@ class Compiler {
 
 		// Finished
 		app('events')->fire('assets.compiled');
+		app('log')->debug("[ASSETS] Collection finished compiling '".$this->collection->id."'");
 
 		return $this->collection->contents;
 	}
