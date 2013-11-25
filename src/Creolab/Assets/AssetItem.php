@@ -115,9 +115,10 @@ class AssetItem {
 
 			// Assets directory
 			$assetDir = pathinfo($this->name, PATHINFO_DIRNAME);
+			$item    = &$this;
 
 			// Prepare callback for imports
-			$callback = function($matches) use ($assetDir)
+			$callback = function($matches) use ($assetDir, $item)
 			{
 				if (isset($matches[2]) and $import = $matches[2])
 				{
@@ -129,7 +130,7 @@ class AssetItem {
 						$importModified = (int) @filemtime($importPath);
 
 						// Check modified time
-						if ($importModified > $this->modified) $this->modified = $importModified;
+						if ($importModified > $item->modified) $item->modified = $importModified;
 
 						// Get imported contents
 						return app('files')->getRemote($importPath);
