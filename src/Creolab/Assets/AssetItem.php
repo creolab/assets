@@ -142,7 +142,7 @@ class AssetItem {
 			};
 
 			// Test
-			$this->contents = CssUtils::filterImports($this->contents, $callback);
+			if ($this->type == 'css') $this->contents = CssUtils::filterImports($this->contents, $callback);
 
 			// Update group modified time
 			if ($this->modified > $this->collection->modified)
