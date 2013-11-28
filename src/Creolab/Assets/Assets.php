@@ -219,7 +219,7 @@ class Assets {
 	 */
 	public function configure($options = array())
 	{
-		app('config')->set('assets::base_url',  app('url')->asset('/'));
+		app('config')->set('assets::base_url',  app('url')->asset(app('config')->get('assets::public_dir', '/') . '/'));
 		app('config')->set('assets::cache_url', app('url')->asset(app('config')->get('assets::cache_path')) . '/');
 	}
 
