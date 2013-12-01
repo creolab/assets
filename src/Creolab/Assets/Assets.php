@@ -205,10 +205,13 @@ class Assets {
 		else               $assets = app('assets')->showCSSCollection($name, $assets, $options);
 
 		// Calculate duration
-		list($sm, $ss) = explode(' ', $start);
-		list($em, $es) = explode(' ', microtime());
-		$duration = number_format(($em + $es) - ($sm + $ss), 4);
-		app('log')->debug("[ASSETS] Collection '$collection' displayed in $duration ms.");
+		if (app('config')->get('assets::debug'))
+		{
+			list($sm, $ss) = explode(' ', $start);
+			list($em, $es) = explode(' ', microtime());
+			$duration = number_format(($em + $es) - ($sm + $ss), 4);
+			app('log')->debug("[ASSETS] Collection '$collection' displayed in $duration ms.");
+		}
 
 		return $assets;
 	}

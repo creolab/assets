@@ -51,4 +51,9 @@ return array(
 	 */
 	'alias' => 'Assets',
 
+	/**
+	 * Debuging
+	 */
+	'debug' => false,
+
 );
