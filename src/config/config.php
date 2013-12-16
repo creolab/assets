@@ -17,7 +17,7 @@ return array(
 	/**
 	 * Base URL for application
 	 */
-	'base_url' => app('url')->to('/'),
+	'base_url' => app('url')->to('/') . '/',
 
 	/**
 	 * Publicly accessable firectory for your assets
