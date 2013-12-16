@@ -100,8 +100,7 @@ class AssetItem {
 	 */
 	public function fileAdvancedInfo()
 	{
-		$public     = public_path() . '/' . app('config')->get('assets::public_path') . '/' . $this->name;
-		$this->path = $public;
+		$this->path = public_path() . '/' . app('config')->get('assets::public_dir') . '/' . $this->name;
 
 		if (app('files')->exists($this->path))
 		{
