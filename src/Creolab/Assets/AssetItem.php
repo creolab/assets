@@ -132,7 +132,7 @@ class AssetItem {
 						if ($importModified > $item->modified) $item->modified = $importModified;
 
 						// Get imported contents
-						return app('files')->getRemote($importPath);
+						return app('files')->get($importPath);
 					}
 					elseif (isset($matches[0]))
 					{
@@ -162,7 +162,7 @@ class AssetItem {
 		{
 			if (app('files')->exists($this->path))
 			{
-				$this->contents = app('files')->getRemote($this->path);
+				$this->contents = app('files')->get($this->path);
 			}
 		}
 
